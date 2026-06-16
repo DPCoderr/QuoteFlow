@@ -5,14 +5,14 @@ namespace Api.Features.Todos;
 
 public static class TodoEndpoints
 {
-    public static RouteGroupBuilder MapTodos(this RouteGroupBuilder api)
+    public static RouteGroupBuilder MapTodosEndpoints(this RouteGroupBuilder app)
     {
-        var todos = api.MapGroup("/todos")
+        var group = app.MapGroup("/todos")
             .WithTags("Todos");
 
-        todos.MapListTodos();
-        todos.MapCreateTodo();
+        group.MapListTodos();
+        group.MapCreateTodo();
 
-        return todos;
+        return group;
     }
 }

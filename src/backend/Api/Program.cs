@@ -2,9 +2,13 @@ using Api.Data;
 using Api.Features.Todos;
 using FluentValidation;
 using Microsoft.EntityFrameworkCore;
+using QuestPDF.Infrastructure;
 using Scalar.AspNetCore;
 
 var builder = WebApplication.CreateBuilder(args);
+
+// Configure PDF to community license 
+QuestPDF.Settings.License = LicenseType.Community;
 
 builder.AddServiceDefaults();
 builder.AddNpgsqlDbContext<AppDbContext>("appdb");
@@ -42,6 +46,7 @@ if (app.Environment.IsDevelopment())
 app.MapDefaultEndpoints();
 
 var api = app.MapGroup("/api");
-api.MapTodos();
+api.MapTodosEndpoints();
+api.MapQuotesEndpoints();
 
 await app.RunAsync();
